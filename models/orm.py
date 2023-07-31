@@ -44,7 +44,7 @@ airline_quarterly_numbers = Table(
     mapper_registry.metadata,
     Column('Id', UnicodeText(255), primary_key=True, unique=True),
     Column('Carrier', String(255), ForeignKey('airlines.Code')),
-    Column('ItemName', String),
+    Column('ItemName', String(255)),
     Column('Quarter', Integer),
     Column('Value', Float),
     Column('Year', Integer),
@@ -55,7 +55,7 @@ airlines = Table(
     mapper_registry.metadata,
     Column('Id', Integer, primary_key=True, unique=True),
     Column('Code', String(255), unique=True),
-    Column('Name', String),
+    Column('Name', String(255)),
     Column('UniqueName', String(255), unique=True),
 )
 
