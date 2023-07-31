@@ -11,8 +11,8 @@ mapper_registry = registry()
 airline_items_mishandles = Table(
     'airline_items_mishandles',
     mapper_registry.metadata,
-    Column('Id', UnicodeText, primary_key=True, unique=True),
-    Column('AirlineCode', String, ForeignKey('airlines.Code')),
+    Column('Id', UnicodeText(255), primary_key=True, unique=True),
+    Column('AirlineCode', String(255), ForeignKey('airlines.Code')),
     Column('MishandledBags', Integer),
     Column('MishandledChairs', Integer),
     Column('Month', Integer),
@@ -25,14 +25,14 @@ airline_items_mishandles = Table(
 airline_passenger_mishandles = Table(
     'airline_passenger_mishandles',
     mapper_registry.metadata,
-    Column('Id', UnicodeText, primary_key=True, unique=True),
+    Column('Id', UnicodeText(255), primary_key=True, unique=True),
     Column('CompPaid', Integer),
-    Column('MktAirlineCode', String, ForeignKey('airlines.Code')),
+    Column('MktAirlineCode', String(255), ForeignKey('airlines.Code')),
     Column('Month', Integer),
     Column('NumComp', Integer),
     Column('NumDowngraded', Integer),
     Column('NumUpgraded', Integer),
-    Column('OpAirlineCode', String, ForeignKey('airlines.Code')),
+    Column('OpAirlineCode', String(255), ForeignKey('airlines.Code')),
     Column('Quarter', Integer),
     Column('TotalBoarding', Integer),
     Column('TotalDenied', Integer),
@@ -42,8 +42,8 @@ airline_passenger_mishandles = Table(
 airline_quarterly_numbers = Table(
     'airline_quarterly_numbers',
     mapper_registry.metadata,
-    Column('Id', UnicodeText, primary_key=True, unique=True),
-    Column('Carrier', String, ForeignKey('airlines.Code')),
+    Column('Id', UnicodeText(255), primary_key=True, unique=True),
+    Column('Carrier', String(255), ForeignKey('airlines.Code')),
     Column('ItemName', String),
     Column('Quarter', Integer),
     Column('Value', Float),
@@ -54,24 +54,24 @@ airlines = Table(
     'airlines',
     mapper_registry.metadata,
     Column('Id', Integer, primary_key=True, unique=True),
-    Column('Code', String, unique=True),
+    Column('Code', String(255), unique=True),
     Column('Name', String),
-    Column('UniqueName', String, unique=True),
+    Column('UniqueName', String(255), unique=True),
 )
 
 airports = Table(
     'airports',
     mapper_registry.metadata,
     Column('Id', Integer, primary_key=True, unique=True),
-    Column('Code', String, unique=True),
+    Column('Code', String(255), unique=True),
     Column('CityId', Integer, ForeignKey('markets.Id')),
 )
 
 connecting_market_fare_info = Table(
     'connecting_market_fare_info',
     mapper_registry.metadata,
-    Column('Id', UnicodeText, primary_key=True, unique=True),
-    Column('Carrier', String, ForeignKey('airlines.Code')),
+    Column('Id', UnicodeText(255), primary_key=True, unique=True),
+    Column('Carrier', String(255), ForeignKey('airlines.Code')),
     Column('City1', Integer, ForeignKey('markets.Id')),
     Column('City2', Integer, ForeignKey('markets.Id')),
     Column('Fare', Float),
@@ -85,9 +85,9 @@ connecting_market_fare_info = Table(
 connecting_market_fare_info_MultiCarrier = Table(
     'connecting_market_fare_info_MultiCarrier',
     mapper_registry.metadata,
-    Column('Id', UnicodeText, primary_key=True, unique=True),
-    Column('CarrierLg', String, ForeignKey('airlines.Code')),
-    Column('CarrierLow', String, ForeignKey('airlines.Code')),
+    Column('Id', UnicodeText(255), primary_key=True, unique=True),
+    Column('CarrierLg', String(255), ForeignKey('airlines.Code')),
+    Column('CarrierLow', String(255), ForeignKey('airlines.Code')),
     Column('City1', Integer, ForeignKey('markets.Id')),
     Column('City2', Integer, ForeignKey('markets.Id')),
     Column('Fare', Float),
@@ -103,13 +103,13 @@ markets = Table(
     'markets',
     mapper_registry.metadata,
     Column('Id', Integer, primary_key=True, unique=True),
-    Column('Name', String, unique=False),
+    Column('Name', String(255), unique=False),
 )
 
 market_fares = Table(
     'market_fares',
     mapper_registry.metadata,
-    Column('Id', UnicodeText, primary_key=True, unique=True),
+    Column('Id', UnicodeText(255), primary_key=True, unique=True),
     Column('AirportId', Integer, ForeignKey('airports.Id')),
     Column('CityId', Integer, ForeignKey('markets.Id')),
     Column('TotalAvgHubFare', Float),

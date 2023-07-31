@@ -17,12 +17,11 @@ db = None
 def getEngine() -> create_engine:
     engine = create_engine(os.environ.get('DB_PATH'), echo=False)
     try:
-        start_mappers()
+        mapper_registry.metadata.create_all(bind=engine)
     except Exception:
         pass
-
     try:
-        mapper_registry.metadata.create_all(bind=engine)
+        start_mappers()
     except Exception:
         pass
     global db
