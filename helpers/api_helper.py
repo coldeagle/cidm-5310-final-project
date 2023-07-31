@@ -13,7 +13,7 @@ def do_callout(identifier: str, select: str, where: str) -> pd.DataFrame:
 def do_callout_return_raw(identifier: str, select: str, where: str):
     socrata_domain = 'data.transportation.gov'
     socrata_dataset_identifier = identifier
-    socrata_token = os.environ.get('APP-PUBLIC')
+    socrata_token = os.environ.get('APP_PUBLIC')
     client = Socrata(socrata_domain, socrata_token)
 
     return client.get(socrata_dataset_identifier, select=select, where=where)
